@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T08 · Xóa dữ liệu</title>
+<style>
+:root{--bg:#f1efe9;--card:#fff;--ink:#1d1d1b;--mute:#5f5e59;--line:#d9d7ce;--accent:#b3261e;--accent-soft:#fbe9e7;--ok:#1f7a4d;--ok-soft:#e6f3ec;--warn:#9a5600;--warn-soft:#fbf0dc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141412;--card:#1f1f1c;--ink:#eceae4;--mute:#a7a59e;--line:#3a3935;--accent:#ef6a5f;--accent-soft:#3d201d;--ok:#6fcf97;--ok-soft:#1d3328;--warn:#f2b866;--warn-soft:#3a2d15}}
+:root[data-theme="dark"]{--bg:#141412;--card:#1f1f1c;--ink:#eceae4;--mute:#a7a59e;--line:#3a3935;--accent:#ef6a5f;--accent-soft:#3d201d;--ok:#6fcf97;--ok-soft:#1d3328;--warn:#f2b866;--warn-soft:#3a2d15}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:24px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+.slide{position:absolute;left:50%;top:50%;width:1280px;height:720px;padding:56px 72px 48px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center;opacity:0;visibility:hidden;transition:opacity .25s ease;display:flex;flex-direction:column}
+.slide.on{opacity:1;visibility:visible}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+.kicker{font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-size:64px;line-height:1.1;margin:0 0 20px;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.15;margin:0 0 22px;letter-spacing:-.015em}
+h3{font-size:26px;margin:0 0 8px}
+p{margin:0 0 12px}
+.lead{font-size:28px;color:var(--mute);max-width:980px}
+.mute{color:var(--mute)}
+.small{font-size:20px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.card.bad{border-color:var(--accent);background:var(--accent-soft)}
+.card.good{border-color:var(--ok)}
+.num{font-size:56px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tag{display:inline-block;font-size:16px;font-weight:700;padding:3px 12px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}.tag.warn{background:var(--warn-soft);color:var(--warn)}
+ul{margin:0;padding-left:1.1em}li{margin:0 0 10px}
+code{font:.8em ui-monospace,Consolas,monospace;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+table{border-collapse:collapse;width:100%;font-size:21px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mute);font-size:17px;font-weight:700}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.row{display:flex;gap:24px;align-items:stretch}
+.grow{flex:1 1 0;min-width:0}
+.step{display:flex;gap:16px;align-items:flex-start}
+.step .b{flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:22px;display:grid;place-items:center}
+.chrome{position:absolute;left:72px;right:72px;bottom:20px;display:flex;justify-content:space-between;font-size:16px;color:var(--mute)}
+svg text{font-family:inherit}
+.nd{fill:var(--card);stroke:var(--line);stroke-width:2}
+.nd.hot{stroke:var(--accent);stroke-width:3;fill:var(--accent-soft)}
+.nt{fill:var(--ink);font-size:18px;font-weight:600;text-anchor:middle}
+.nl{fill:var(--mute);font-size:15px}
+.ed{fill:none;stroke:var(--mute);stroke-width:2}
+.ah{fill:var(--mute)}
+.pill{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.5}
+.pt{fill:var(--warn);font-size:14px;font-weight:700;text-anchor:middle}
+#bar{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);width:0;transition:width .25s ease}
+#help{position:fixed;right:14px;top:10px;font-size:14px;color:var(--mute);opacity:.8}
+@media print{
+  @page{size:1280px 720px;margin:0}
+  html,body{height:auto;overflow:visible}
+  .slide{position:relative;left:0;top:0;transform:none;opacity:1;visibility:visible;break-after:page;page-break-after:always}
+  #bar,#help{display:none}
+}
+</style>
+</head>
+<body>
+
+<section class="slide" aria-label="Slide 1">
+  <p class="kicker">T08 · Retention &amp; Delete Request Simulator</p>
+  <h1>Bấm “Xóa” — dữ liệu của bạn đã thật sự biến mất chưa?</h1>
+  <p class="lead">Từ một video lái xe, hệ thống sinh ra hàng chục bản sao vẫn nhận diện được một con người. Xóa một file là chưa đủ.</p>
+  <div class="grid g4" style="margin-top:auto">
+    <div class="card"><div class="num">212</div><p class="mute small" style="margin-top:8px">artefact mock trong đồ thị dữ liệu</p></div>
+    <div class="card"><div class="num">10</div><p class="mute small" style="margin-top:8px">yêu cầu xóa (DR-001 … DR-010)</p></div>
+    <div class="card"><div class="num">6</div><p class="mute small" style="margin-top:8px">loại bản dẫn xuất: backup, frame, crop, embedding, annotation, export</p></div>
+    <div class="card"><div class="num">3</div><p class="mute small" style="margin-top:8px">hành động cho mỗi cặp: delete · retain_legal_hold · escalate</p></div>
+  </div>
+  <div class="chrome"><span>Dữ liệu mock — không có file thật nào bị xóa</span><span>1 / 7</span></div>
+</section>
+
+<section class="slide" aria-label="Slide 2">
+  <p class="kicker">Vấn đề</p>
+  <h2>Hai cách sai, ngược chiều nhau</h2>
+  <div class="grid g2">
+    <div class="card bad">
+      <span class="tag">Xóa thiếu</span>
+      <h3 style="margin-top:10px">Vẫn còn dấu vết</h3>
+      <p class="small">Xóa video gốc nhưng còn embedding khuôn mặt hoặc một bản sao ở ổ cũ: vẫn nhận ra người đó.</p>
+      <p class="mute small" style="margin:0">Đo bằng <b>Deletion Completeness</b> (càng cao càng tốt)</p>
+    </div>
+    <div class="card bad">
+      <span class="tag">Xóa thừa</span>
+      <h3 style="margin-top:10px">Xóa thứ không được xóa</h3>
+      <p class="small">Xóa hết con cháu của video thì xóa luôn mặt người khác hoặc dữ liệu đang bị giữ theo luật.</p>
+      <p class="mute small" style="margin:0">Đo bằng <b>False-delete count</b> (mục tiêu bằng 0)</p>
+    </div>
+  </div>
+  <h3 style="margin-top:26px">Ba loại ngoại lệ máy không được tự quyết</h3>
+  <div class="grid g3">
+    <div class="card"><span class="tag warn">retain_legal_hold</span><p class="small" style="margin:10px 0 0">Đang bị giữ theo luật: giữ lại, hẹn xóa khi hết hold.</p></div>
+    <div class="card"><span class="tag warn">escalate</span><p class="small" style="margin:10px 0 0">Thiếu quyền hoặc không rõ nguồn gốc: chuyển cho người quyết.</p></div>
+    <div class="card"><span class="tag warn">escalate</span><p class="small" style="margin:10px 0 0">Dữ liệu chung nhiều người: cần che, không xóa cả file.</p></div>
+  </div>
+  <div class="chrome"><span>Sửa lỗi này dễ gây ra lỗi kia</span><span>2 / 7</span></div>
+</section>
+
+<section class="slide" aria-label="Slide 3">
+  <p class="kicker">Dữ liệu</p>
+  <h2>Dữ liệu là một đồ thị, không phải một file</h2>
+  <div class="row" style="flex:1;min-height:0">
+    <div style="flex:none;width:760px">
+      <svg viewBox="0 0 760 440" width="760" height="440" role="img" aria-label="Đồ thị lineage: raw_video sinh ra backup và frame; frame sinh ra face_crop và annotation; face_crop sinh ra embedding và training_export">
+        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path class="ah" d="M0,0 L8,4 L0,8 z"/></marker></defs>
+        <path class="ed" marker-end="url(#ar)" d="M160 220 C185 220,185 83,208 83"/>
+        <path class="ed" marker-end="url(#ar)" d="M160 220 C185 220,185 313,208 313"/>
+        <path class="ed" marker-end="url(#ar)" d="M360 313 C385 313,385 223,408 223"/>
+        <path class="ed" marker-end="url(#ar)" d="M360 313 C385 313,385 383,408 383"/>
+        <path class="ed" marker-end="url(#ar)" d="M560 223 C580 223,580 173,598 173"/>
+        <path class="ed" marker-end="url(#ar)" d="M560 223 C580 223,580 273,598 273"/>
+        <rect class="nd" x="10" y="197" width="150" height="46" rx="10"/><text class="nt" x="85" y="226">raw_video</text>
+        <rect class="pill" x="30" y="160" width="110" height="26" rx="13"/><text class="pt" x="85" y="178">legal hold</text>
+        <rect class="nd" x="210" y="60" width="150" height="46" rx="10"/><text class="nt" x="285" y="89">backup</text>
+        <rect class="nd hot" x="210" y="290" width="150" height="46" rx="10"/><text class="nt" x="285" y="319">frame</text>
+        <text class="nl" x="210" y="358">a0011 · 2 người</text>
+        <rect class="nd" x="410" y="200" width="150" height="46" rx="10"/><text class="nt" x="485" y="229">face_crop</text>
+        <rect class="nd" x="410" y="360" width="150" height="46" rx="10"/><text class="nt" x="485" y="389">annotation</text>
+        <rect class="nd" x="600" y="150" width="150" height="46" rx="10"/><text class="nt" x="675" y="179">embedding</text>
+        <rect class="nd" x="600" y="250" width="150" height="46" rx="10"/><text class="nt" x="675" y="279">training_export</text>
+        <text class="nl" x="600" y="318">gom nhiều người</text>
+      </svg>
+    </div>
+    <div class="grow">
+      <ul>
+        <li>Mỗi artefact là một <b>đỉnh</b>; mỗi cạnh nghĩa là “sinh ra từ”.</li>
+        <li>Frame <code>a0011</code> có <b>hai người</b>: subj_00 và subj_01. Video cha chỉ ghi subj_00.</li>
+        <li>Crop con của nó chỉ chứa mặt subj_00.</li>
+      </ul>
+      <div class="card bad" style="margin-top:14px">
+        <p style="margin:0"><b>Tìm theo tên file</b> → sót frame này.<br><b>Xóa hết con cháu</b> → xóa nhầm mặt subj_00.</p>
+      </div>
+    </div>
+  </div>
+  <div class="chrome"><span>Cần cả quan hệ cha–con lẫn nhãn người trên từng artefact</span><span>3 / 7</span></div>
+</section>
+
+<section class="slide" aria-label="Slide 4">
+  <p class="kicker">Thuật toán</p>
+  <h2>Bốn bước, không dùng machine learning</h2>
+  <div class="grid g2" style="gap:18px">
+    <div class="card step"><div class="b">1</div><div><h3>Xác định phạm vi</h3><p class="small" style="margin:0">Lấy artefact gắn tên người yêu cầu, rồi duyệt BFS <b>ngược lên cha</b> qua liên kết một-cha để tìm chỗ nhãn bỏ sót. Thêm backup của chúng.</p></div></div>
+    <div class="card step"><div class="b">2</div><div><h3>Lan legal hold</h3><p class="small" style="margin:0">Duyệt theo <b>thứ tự tô-pô</b> (Kahn). Bị hold nếu tự có cờ, hoặc <b>mọi</b> cha đều bị hold. Một lượt là đủ.</p></div></div>
+    <div class="card step"><div class="b">3</div><div><h3>Phân loại bằng 7 luật</h3><p class="small" style="margin:0">Danh sách quyết định: luật đầu tiên khớp thì thắng. Mỗi dòng kết quả có đúng một <code>reason_code</code>.</p></div></div>
+    <div class="card step"><div class="b">4</div><div><h3>Người duyệt ngoại lệ</h3><p class="small" style="margin:0">Mọi dòng không phải <code>delete</code> vào hàng chờ. Một dòng legal hold <b>không thể</b> bị đổi thành delete.</p></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card"><div class="num" style="font-size:34px">O(V + E)</div><p class="mute small" style="margin:6px 0 0">chi phí mỗi yêu cầu</p></div>
+    <div class="card"><div class="num" style="font-size:34px">Tất định</div><p class="mute small" style="margin:6px 0 0">cùng đầu vào, cùng kết quả</p></div>
+    <div class="card"><div class="num" style="font-size:34px">1 lý do</div><p class="mute small" style="margin:6px 0 0">mỗi dòng đều giải thích được</p></div>
+  </div>
+  <div class="chrome"><span>Code: src/t08/policy.py</span><span>4 / 7</span></div>
+</section>
+
+<section class="slide" aria-label="Slide 5">
+  <p class="kicker">Luật quyết định</p>
+  <h2>Bảy luật — thứ tự mới là thứ quyết định</h2>
+  <div class="row" style="flex:1;min-height:0">
+    <div style="flex:none;width:700px">
+      <table>
+        <tr><th>#</th><th>Điều kiện</th><th>Hành động</th></tr>
+        <tr><td>1</td><td>Bị legal hold (hoặc dẫn xuất hoàn toàn từ dữ liệu bị hold)</td><td><span class="tag warn">retain_legal_hold</span></td></tr>
+        <tr><td>2</td><td>Chưa xác minh danh tính</td><td rowspan="5" style="vertical-align:middle"><span class="tag warn">escalate</span></td></tr>
+        <tr><td>3</td><td>Không đủ quyền (owner ∉ acl)</td></tr>
+        <tr><td>4</td><td>Không rõ nguồn gốc</td></tr>
+        <tr><td>5</td><td>Chứa người yêu cầu nhưng không gắn tên họ</td></tr>
+        <tr><td>6</td><td>Dùng chung với người khác</td></tr>
+        <tr><td>7</td><td>Còn lại</td><td><span class="tag ok">delete</span></td></tr>
+      </table>
+    </div>
+    <div class="grow">
+      <div class="card good">
+        <h3>Ví dụ: DR-001 (subj_01)</h3>
+        <p class="small" style="margin:0 0 10px"><b>19</b> artefact trong phạm vi</p>
+        <p style="margin:0 0 6px"><span class="tag ok">14 delete</span> &nbsp; <span class="tag warn">5 escalate</span></p>
+        <ul class="small" style="margin-top:10px">
+          <li>Video của người khác có chứa subj_01, cùng backup của nó</li>
+          <li>Frame và annotation chung hai người</li>
+          <li>Gói training_export nhiều người</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="chrome"><span>Thay đổi thứ tự là thay đổi chính sách</span><span>5 / 7</span></div>
+</section>
+
+<section class="slide" aria-label="Slide 6">
+  <p class="kicker">Chứng minh</p>
+  <h2>Chứng minh bằng một hệ thống ảo</h2>
+  <div class="grid g3" style="gap:18px">
+    <div class="card">
+      <span class="tag">A · Đề tự tạo</span>
+      <p class="small" style="margin:10px 0">25 đề, 3662 dòng đáp án cài sẵn, chấm bằng <code>eval_t08</code> chính thức.</p>
+      <table class="small" style="font-size:19px"><tr><th></th><th>PoC</th><th>Baseline</th></tr>
+        <tr><td>Xóa đủ</td><td class="n">1.00</td><td class="n">0.07</td></tr>
+        <tr><td>Xóa nhầm</td><td class="n">0</td><td class="n">75</td></tr>
+        <tr><td>Ngoại lệ đúng</td><td class="n">1.00</td><td class="n">0.00</td></tr></table>
+    </div>
+    <div class="card">
+      <span class="tag">B · Kho ảo</span>
+      <p class="small" style="margin:10px 0">Thực thi kế hoạch trên fixture rồi kiểm tra <b>trạng thái cuối</b> (C1–C5).</p>
+      <table style="font-size:19px"><tr><th></th><th>PoC</th><th>Baseline</th></tr>
+        <tr><td>Đạt</td><td class="n">5 / 5</td><td class="n">2 / 5</td></tr>
+        <tr><td>Xóa nhầm</td><td class="n">0</td><td class="n">2</td></tr>
+        <tr><td>Còn sót</td><td class="n">0</td><td class="n">94</td></tr></table>
+    </div>
+    <div class="card">
+      <span class="tag">C · Thử phá</span>
+      <p class="small" style="margin:10px 0">Cố ý làm sai kế hoạch theo 14 kiểu: xóa file đang hold, quên một embedding, giấu lệnh xóa sau dòng trùng…</p>
+      <div class="num">14 / 14</div><p class="mute small" style="margin-top:6px">kiểu sai bị verifier bắt</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:22px;border-color:var(--warn);background:var(--warn-soft)">
+    <p class="small" style="margin:0"><b>Giới hạn:</b> chứng minh đúng theo <b>chính sách nhóm tự đặt</b>, không phải điểm của ground truth giảng viên. Đáp án cài sẵn và planner do cùng một tác giả viết nên có thể hiểu sai đề giống nhau.</p>
+  </div>
+  <div class="chrome"><span>Số liệu do tools/t08_selfcheck.py sinh ra</span><span>6 / 7</span></div>
+</section>
+
+<section class="slide" aria-label="Slide 7">
+  <p class="kicker">Demo</p>
+  <h2>Sau nút “Xóa” phần mềm làm gì?</h2>
+  <div class="row" style="flex:1;min-height:0">
+    <div class="grow">
+      <p class="small mute" style="margin:0 0 10px">Đúng 5 bước bắt buộc của đề T08:</p>
+      <ol style="margin:0;padding-left:1.2em;font-size:23px">
+        <li><b>Nhận yêu cầu xóa</b>: mã DR, chủ thể, hạn, danh tính</li>
+        <li><b>Truy ngược lineage</b>: tìm mọi artefact liên quan</li>
+        <li><b>Dry-run và ngoại lệ</b>: kế hoạch, chưa xóa gì</li>
+        <li><b>Người duyệt</b> quyết định từng ngoại lệ</li>
+        <li><b>Xóa mock và bằng chứng</b>: báo rõ dữ liệu nào bị xóa</li>
+      </ol>
+    </div>
+    <div style="flex:none;width:560px;display:flex;flex-direction:column;gap:10px">
+      <div class="card" style="padding:14px 20px"><span class="tag">Dữ liệu trong bài</span><p class="small" style="margin:8px 0 0">15 video gốc, 15 backup, 45 frame, 45 face crop, 45 embedding, 45 annotation, 2 training export.</p></div>
+      <div class="card" style="padding:14px 20px"><span class="tag">Ngoại lệ có thật</span><p class="small" style="margin:8px 0 0">2 video bị legal hold, 3 embedding không rõ nguồn gốc, 1 backup thuộc acl vendor-x, 10 artefact nhiều người.</p></div>
+      <div class="card" style="padding:14px 20px"><span class="tag">Hai vai trò</span><p class="small" style="margin:8px 0 0">Chủ thể dữ liệu gửi yêu cầu; người duyệt quyết định ngoại lệ.</p></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;padding:14px 24px"><p class="small" style="margin:0"><b>Thử ngay:</b> mở <code>reports/t08_demo.html</code>, chọn một DR, bấm “Xóa dữ liệu của tôi”.</p></div>
+  <div class="chrome"><span>Xóa chỉ diễn ra trên kho ảo; hành động theo chính sách của nhóm</span><span>7 / 7</span></div>
+</section>
+
+<div id="bar"></div>
+<div id="help">← → hoặc Space · F: toàn màn hình · P: in</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll(".slide")),i=0,bar=document.getElementById("bar");
+  function fit(){var s=Math.min(innerWidth/1280,innerHeight/720);document.documentElement.style.setProperty("--s",s)}
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,k){s.classList.toggle("on",k===i)});
+    bar.style.width=((i+1)/slides.length*100)+"%";
+    try{history.replaceState(null,"","#"+(i+1))}catch(e){}
+  }
+  addEventListener("resize",fit);
+  addEventListener("keydown",function(e){
+    var k=e.key;
+    if(k==="ArrowRight"||k==="PageDown"||k===" "||k==="Enter"){e.preventDefault();show(i+1)}
+    else if(k==="ArrowLeft"||k==="PageUp"||k==="Backspace"){e.preventDefault();show(i-1)}
+    else if(k==="Home")show(0);else if(k==="End")show(slides.length-1);
+    else if(k==="f"||k==="F"){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
+    else if(k==="p"||k==="P")print();
+  });
+  var x0=null;
+  addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
+  addEventListener("touchend",function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)show(i+(d<0?1:-1));x0=null});
+  addEventListener("click",function(e){if(e.target.closest("a,button"))return;show(i+(e.clientX>innerWidth/2?1:-1))});
+  fit();show(Math.max(0,(parseInt(location.hash.slice(1),10)||1)-1));
+})();
+</script>
+</body>
+</html>
