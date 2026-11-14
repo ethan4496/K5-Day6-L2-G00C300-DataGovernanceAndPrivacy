@@ -230,7 +230,7 @@ pytest -q
 | Trần Đức Kỳ |2A202603277 | Policy engine: `decide_action`, `check_invariants`, `override_allowed` | ____ | ____ |
 | Nguyễn Ngọc Đồng | 2A202603291 | Baseline & Evaluation: `src/examples/t08_baseline.py`, `reports/metric_contract.md` | ____ | ____ |
 | Nguyễn Văn Hùng | 2A202603295 | Human review & Audit: `src/pipeline.py` (rank + review), `mock_delete` | ____ | ____ |
-| Lê Minh Thắng | 2A202603292 | QA tests + Report & Demo: `tests/test_t08_deletion.py`, `tools/show_t08.py`, report | ____ | ____ |
+| Lê Minh Thắng (2A202603292) | Lê Minh Thắng &lt;leminhthang78962@gmail.com&gt; | QA tests + Report & Demo: `tests/test_t08_deletion.py`, `tools/show_t08.py`, report | `ef8bbda` — test cycle detection và legal-hold propagation | ____ |
 
 ## 11 · References
 

@@ -4,4 +4,4 @@ Member 2,,,Data & Lineage,src/t08_deletion.py (load_inputs + discover_scope); to
 Member 3,,,Policy engine,src/t08_deletion.py (decide_action + check_invariants + override_allowed),,,
 Member 4,,,Baseline & Evaluation,src/examples/t08_baseline.py; reports/metric_contract.md; reports/metrics_*.json,,,
 Member 5,,,Human review & Audit,src/pipeline.py (rank + review); mock_delete; out/audit_log.jsonl,,,
-Member 6,,,QA tests + Report & Demo,tests/test_t08_deletion.py; tools/show_t08.py; reports/group_report.md; demo/,,,
+Lê Minh Thắng (2A202603292),Lê Minh Thắng,leminhthang78962@gmail.com,QA tests + Report & Demo,tests/test_t08_deletion.py; tools/show_t08.py; reports/group_report.md; demo/,ef8bbda,Added QA tests for lineage cycle rejection and all-parent legal-hold propagation,
