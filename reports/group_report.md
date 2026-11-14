@@ -225,11 +225,11 @@ pytest -q
 | Học viên | Git author/email | Module / vai trò | Commit SHA / diff chứng minh | Trình bày? |
 |---|---|---|---|---|
 | Vu Duy The | ____ | Lead / Integrator + Decision owner: `configs/lab.yaml`, `src/pipeline.py` (run + decide) | `5ad14de` | ____ |
-| ____ | ____ | Data & Lineage: `src/t08_deletion.py` (load_inputs, discover_scope) | ____ | ____ |
-| ____ | ____ | Policy engine: `decide_action`, `check_invariants`, `override_allowed` | ____ | ____ |
-| ____ | ____ | Baseline & Evaluation: `src/examples/t08_baseline.py`, `reports/metric_contract.md` | ____ | ____ |
-| ____ | ____ | Human review & Audit: `src/pipeline.py` (rank + review), `mock_delete` | ____ | ____ |
-| ____ | ____ | QA tests + Report & Demo: `tests/test_t08_deletion.py`, `tools/show_t08.py`, report | ____ | ____ |
+| Nguyễn Văn Thọ | 2A202603299 | Data & Lineage: `src/t08_deletion.py` (load_inputs, discover_scope) | ____ | ____ |
+| Trần Đức Kỳ |2A202603277 | Policy engine: `decide_action`, `check_invariants`, `override_allowed` | ____ | ____ |
+| Nguyễn Ngọc Đồng | 2A202603291 | Baseline & Evaluation: `src/examples/t08_baseline.py`, `reports/metric_contract.md` | ____ | ____ |
+| Nguyễn Văn Hùng | 2A202603295 | Human review & Audit: `src/pipeline.py` (rank + review), `mock_delete` | ____ | ____ |
+| Lê Minh Thắng | 2A202603292 | QA tests + Report & Demo: `tests/test_t08_deletion.py`, `tools/show_t08.py`, report | ____ | ____ |
 
 ## 11 · References
 
