@@ -228,7 +228,7 @@ pytest -q
 | Nguyễn Văn Thọ | 2A202603299 | Data & Lineage: `src/t08_deletion.py` (load_inputs, discover_scope) | ____ | ____ |
 | Trần Đức Kỳ |2A202603277 | Policy engine: `decide_action`, `check_invariants`, `override_allowed` | ____ | ____ |
 | Nguyễn Ngọc Đồng | 2A202603291 | Baseline & Evaluation: `src/examples/t08_baseline.py`, `reports/metric_contract.md` | ____ | ____ |
-| Nguyễn Văn Hùng | 2A202603295 | Human review & Audit: `src/pipeline.py` (rank + review), `mock_delete` | ____ | ____ |
+| Nguyễn Văn Hùng | 2A202603295  | Human review & Audit: `src/pipeline.py` (rank + review), `mock_delete` | ____ | ____ |
 | Lê Minh Thắng | 2A202603292 | QA tests + Report & Demo: `tests/test_t08_deletion.py`, `tools/show_t08.py`, report | ____ | ____ |
 
 ## 11 · References
@@ -250,3 +250,5 @@ pytest -q
 - [ ] Có baseline/PoC metrics, ≥1 failure case, reviewer evidence, decision log. (Đã có failure case và decision log. Còn thiếu metrics chính thức (cần GT) và reviewer evidence đầy đủ 56 dòng.)
 - [x] Có license/source provenance, data splits, seed, offline environment, GT/eval N.
 - [ ] Mỗi thành viên có ≥1 commit thực chất và được nêu minh bạch trong bảng trên.
+
+
