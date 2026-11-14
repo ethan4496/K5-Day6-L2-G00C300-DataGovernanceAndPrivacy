@@ -7,6 +7,7 @@ import pytest
 
 from src import main as runner
 from src import t08_deletion as t8
+from src.t08 import policy as policy_v2
 
 
 def art(aid, typ, subs, parents=(), **kw):
@@ -108,6 +109,36 @@ def test_dangling_parent_fails_loudly(tmp_path):
     (tmp_path / "requests.json").write_text("[]")
     with pytest.raises(ValueError, match="unknown artefacts"):
         t8.load_inputs(tmp_path)
+
+
+# ---------------------------------------------------------- QA for the v2 graph planner
+def test_policy_v2_rejects_lineage_cycles():
+    cyclic = [
+        art("frame_a", "frame", ["A"], ["frame_b"]),
+        art("frame_b", "frame", ["A"], ["frame_a"]),
+    ]
+
+    with pytest.raises(ValueError, match="cycle"):
+        policy_v2.Graph(cyclic)
+
+
+def test_policy_v2_hold_propagation_requires_all_parents_held():
+    artefacts = [
+        art("held_a", "raw_video", ["A"], legal_hold="LH-A"),
+        art("held_b", "raw_video", ["A"], legal_hold="LH-B"),
+        art("free", "raw_video", ["A"]),
+        art("all_held", "training_export", ["A"], ["held_a", "held_b"]),
+        art("mixed", "training_export", ["A"], ["held_a", "free"]),
+    ]
+    requests = [{"request_id": "R1", "subject_id": "A", "identity_verified": True}]
+
+    plan = policy_v2.plan_actions(artefacts, requests).set_index("artefact_id")
+
+    assert plan.loc["all_held", ["action", "reason_code"]].tolist() == [
+        "retain_legal_hold",
+        "LEGAL_HOLD_INHERITED",
+    ]
+    assert plan.loc["mixed", ["action", "reason_code"]].tolist() == ["delete", "DELETE_OK"]
 
 
 # ---------------------------------------------------------------- end-to-end on the official fixture
