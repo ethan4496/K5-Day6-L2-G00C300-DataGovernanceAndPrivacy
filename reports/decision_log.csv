@@ -1,0 +1,3 @@
+ts,scope,status,canonical,reason_code,reason,owner,evidence
+2026-11-14T09:20:58+00:00,t08,HOLD,HOLD,EXCEPTIONS_PENDING_REVIEW,56/56 exception rows still need a named reviewer; deletes not executed,Vu Duy The,out/poc/actions.csv;out/poc/review_queue.csv;out/poc/audit_log.jsonl
+2026-11-14T09:25:01+00:00,t08,HOLD,HOLD,EXCEPTIONS_PENDING_REVIEW,54/56 exception rows still need a named reviewer; deletes not executed,Vu Duy The,out/poc/actions.csv;out/poc/review_queue.csv;out/poc/audit_log.jsonl

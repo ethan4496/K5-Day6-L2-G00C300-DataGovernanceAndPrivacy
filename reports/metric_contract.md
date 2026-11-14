@@ -19,6 +19,6 @@
 | Chỉ số lỗi xấu (miss / false alarm / false reject) | **False-delete count** (mục tiêu 0, guardrail cứng) > miss (giữ bản sao / embedding định danh) |
 | Slices sẽ báo cáo (≥2) | theo `expected_action` (delete / escalate / retain_legal_hold) và theo `type` artefact |
 | Cách báo độ bất định khi N nhỏ (Wilson CI / bootstrap) | Wilson 95% CI cho Completeness và Exception accuracy (N exception ≈ 30) |
-| Ngày giờ chốt + người chốt | 2026-11-14 · TODO: tên owner |
+| Ngày giờ chốt + người chốt | 2026-11-14 · Vu Duy The |
 
 Nếu baseline = 0 thì ghi rõ "baseline = 0" thay vì phần trăm cải thiện.
