@@ -233,7 +233,7 @@ pytest -q
 
 ## 11 · References
 
-| URL | Ngày xem | 1–2 dòng ý nghĩa (không chép nguyên văn) |
+| URL | Ngày xem | 1–2 dòng ý nghĩa (không chép nguyên văn, nguyên mẫu) |
 |---|---|---|
 | https://gdpr-info.eu/art-17-gdpr/ | 2026-11-14 | Quyền được xóa. Khoản 3 liệt kê ngoại lệ, trong đó có nghĩa vụ pháp lý và khiếu kiện; đây là cơ sở để legal hold thắng yêu cầu xóa |
 | Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15: [chinhphu.vn](https://chinhphu.vn/?pageid=27160&docid=214590&classid=1&typegroupid=3) · [thuvienphapluat.vn](https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Luat-Bao-ve-du-lieu-ca-nhan-2025-so-91-2025-QH15-625628.aspx) | 2026-11-14 | Luật do Quốc hội ban hành ngày 26/06/2025, hiệu lực từ 01/01/2026. Quy định quyền xóa của chủ thể dữ liệu và các trường hợp ngoại lệ, là căn cứ phía Việt Nam cho policy precedence |
