@@ -1,6 +1,7 @@
 member,git_author_name,git_email,role,modules_files,commit_shas,evidence_note,presenter
-Member 1,,,Lead / Integrator,src/main.py; configs/,,,
-Member 2,,,Data & fixtures,fixtures/; tools/,,,
-Member 3,,,Core algorithm,src/pipeline.py,,,
-Member 4,,,QA / metric,tests/; reports/metrics_*.json,,,
-Member 5,,,Human review + report,reports/group_report.md; demo/,,,
+Member 1,,,Lead / Integrator + Decision owner,configs/lab.yaml; src/pipeline.py (run + decide); git tags,,,
+Member 2,,,Data & Lineage,src/t08_deletion.py (load_inputs + discover_scope); tools/make_t08_selfmade.py,,,
+Member 3,,,Policy engine,src/t08_deletion.py (decide_action + check_invariants + override_allowed),,,
+Member 4,,,Baseline & Evaluation,src/examples/t08_baseline.py; reports/metric_contract.md; reports/metrics_*.json,,,
+Member 5,,,Human review & Audit,src/pipeline.py (rank + review); mock_delete; out/audit_log.jsonl,,,
+Member 6,,,QA tests + Report & Demo,tests/test_t08_deletion.py; tools/show_t08.py; reports/group_report.md; demo/,,,

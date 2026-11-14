@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phân công T08</title>
+<style>
+:root{
+  --bg:#f7f7f5;--card:#ffffff;--ink:#1d1d1b;--muted:#65655f;--line:#e2e1dc;
+  --accent:#2f5d8a;--accent-soft:#e6eef6;--ok:#2e7d4f;--ok-soft:#e5f2ea;--todo:#9a5b00;--todo-soft:#fbf0dc;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161615;--card:#20201e;--ink:#ecebe6;--muted:#a4a39c;--line:#34332f;
+  --accent:#8db6df;--accent-soft:#22303d;--ok:#7cc79a;--ok-soft:#1f3327;--todo:#e8b45f;--todo-soft:#3a2e19;}}
+:root[data-theme="dark"]{
+  --bg:#161615;--card:#20201e;--ink:#ecebe6;--muted:#a4a39c;--line:#34332f;
+  --accent:#8db6df;--accent-soft:#22303d;--ok:#7cc79a;--ok-soft:#1f3327;--todo:#e8b45f;--todo-soft:#3a2e19;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+p.lead{color:var(--muted);margin:0 0 20px}
+code{font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--accent-soft);padding:1px 5px;border-radius:4px}
+pre{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font:13px/1.5 ui-monospace,Menlo,monospace}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 0}
+.flow span{background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.flow i{color:var(--muted);font-style:normal}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card h3{margin:0 0 2px;font-size:16px}
+.card .who{color:var(--muted);font-size:13px;margin-bottom:10px}
+.card .files{font-size:13px;margin:0 0 10px;color:var(--muted)}
+.card ul{margin:0;padding-left:0;list-style:none}
+.card li{padding:4px 0 4px 26px;position:relative;font-size:14px}
+.card li::before{position:absolute;left:0;top:4px;font-size:11px;font-weight:700;padding:1px 5px;border-radius:4px}
+li.ok::before{content:"✓";color:var(--ok);background:var(--ok-soft)}
+li.todo::before{content:"!";color:var(--todo);background:var(--todo-soft);padding:1px 7px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:12px}
+.legend b{padding:1px 6px;border-radius:4px}
+.legend .o{color:var(--ok);background:var(--ok-soft)} .legend .t{color:var(--todo);background:var(--todo-soft)}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:720px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--accent-soft);color:var(--accent);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat .k{font-size:12px;color:var(--muted)} .stat .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat .s{font-size:12px;color:var(--muted)}
+footer{margin-top:40px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<h1>Phân công T08 · Retention &amp; Delete Request Simulator</h1>
+<p class="lead">Day 06 Data Lab · 6 role · cập nhật 14/11/2026. Mỗi người sở hữu phần code/tài liệu của mình và tự commit, để <code>git shortlog</code> khớp với <code>reports/team_contributions.csv</code>.</p>
+
+<div class="flow">
+  <span>01 Nhận request</span><i>→</i><span>02 Truy lineage</span><i>→</i><span>03 Dry-run &amp; exception</span><i>→</i><span>04 Người duyệt</span><i>→</i><span>05 Mock delete + bằng chứng</span>
+</div>
+
+<h2>Hiện trạng</h2>
+<div class="stats">
+  <div class="stat"><div class="k">Pipeline PoC</div><div class="v">exit 0</div><div class="s">chạy bằng <code>make t08</code></div></div>
+  <div class="stat"><div class="k">Test</div><div class="v">60 passed</div><div class="s">0 failed · 13 test T08</div></div>
+  <div class="stat"><div class="k">Artefact có hành động (tự kiểm)</div><div class="v">158/158</div><div class="s">baseline: 10/158</div></div>
+  <div class="stat"><div class="k">Xóa nhầm legal hold</div><div class="v">0</div><div class="s">baseline: 2</div></div>
+</div>
+<p class="lead" style="margin-top:10px">Số trên là tự kiểm tra từ input, không phải điểm chính thức. Deletion Completeness chỉ tính được khi giảng viên chạy <code>src.evaluate</code> với <code>gt/</code>.</p>
+
+<h2>6 role</h2>
+<div class="legend"><span><b class="o">✓</b> đã có bản nháp, người phụ trách đọc lại và chịu trách nhiệm</span><span><b class="t">!</b> còn phải làm</span></div>
+<div class="grid">
+
+  <section class="card">
+    <h3>1 · Lead / Integrator + Decision owner</h3>
+    <div class="who">Thành viên: ________</div>
+    <p class="files"><code>configs/lab.yaml</code> · <code>src/pipeline.py</code> (<code>run</code>, <code>decide</code>) · <code>Makefile</code></p>
+    <ul>
+      <li class="ok">Chọn track t08, chốt params (<code>dry_run</code>, <code>review_budget=60</code>, <code>as_of</code>)</li>
+      <li class="ok">Quyết định: REWORK khi vi phạm bất biến · HOLD khi còn dòng chưa duyệt · GO khi duyệt đủ</li>
+      <li class="todo">Điền <code>group_id</code>, <code>owner</code> trong lab.yaml</li>
+      <li class="todo"><code>git init</code>, lập repo nhóm, merge, <code>make tag-demo</code> / <code>tag-final</code></li>
+      <li class="todo">Ký owner cho quyết định cuối</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3>2 · Data &amp; Lineage</h3>
+    <div class="who">Thành viên: ________</div>
+    <p class="files"><code>src/t08_deletion.py</code> (<code>load_inputs</code>, <code>children_index</code>, <code>discover_scope</code>) · <code>src/pipeline.py</code> (<code>load</code>)</p>
+    <ul>
+      <li class="ok">Kiểm sha256 manifest, bắt parent_id không tồn tại, request trùng</li>
+      <li class="ok">BFS từ artefact gắn tag subject xuống các node con</li>
+      <li class="ok">Bẫy frame chung: không đụng face_crop của người khác (3 node trên fixture)</li>
+      <li class="todo">Giải thích bẫy lineage bằng metadata cụ thể trong report (a0011 → a0012)</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3>3 · Policy engine</h3>
+    <div class="who">Thành viên: ________</div>
+    <p class="files"><code>src/t08_deletion.py</code> (<code>decide_action</code>, <code>check_invariants</code>, <code>override_allowed</code>)</p>
+    <ul>
+      <li class="ok">Thứ tự ưu tiên: legal hold &gt; danh tính &gt; ACL &gt; nguồn gốc &gt; nhiều subject &gt; untagged &gt; delete</li>
+      <li class="ok">Bất biến: không xóa bản đang hold, không xóa dữ liệu người khác</li>
+      <li class="todo">Ghi căn cứ cho từng reason_code: GDPR Đ.17(3), Luật 91/2025, NĐ 356/2025</li>
+      <li class="todo">Hỏi giảng viên 2 giả định: hold có lan xuống bản dẫn xuất không; training export nhiều subject thì escalate hay xóa</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3>4 · Baseline &amp; Evaluation</h3>
+    <div class="who">Thành viên: ________</div>
+    <p class="files"><code>src/examples/t08_baseline.py</code> · <code>reports/metric_contract.md</code> · <code>reports/metrics_*.json</code></p>
+    <ul>
+      <li class="ok">Baseline theo đề: chỉ xóa raw video theo filename</li>
+      <li class="ok">Metric contract đã điền (còn tên người chốt)</li>
+      <li class="todo">Tính Wilson 95% CI cho các tỉ lệ khi có số</li>
+      <li class="todo">Khi có overlay giảng viên: <code>make eval-baseline eval-poc compare TRACK=t08</code></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3>5 · Human review &amp; Audit</h3>
+    <div class="who">Thành viên: ________</div>
+    <p class="files"><code>src/pipeline.py</code> (<code>rank</code>, <code>review</code>) · <code>src/t08_deletion.py</code> (<code>review_score</code>, <code>mock_delete</code>)</p>
+    <ul>
+      <li class="ok">Review queue 56 dòng + contact sheet HTML có nút Export CSV</li>
+      <li class="ok">Guardrail: reviewer không thể ép xóa bản đang hold / nhiều subject</li>
+      <li class="ok">Audit log JSONL cho mọi hành động; mock delete idempotent</li>
+      <li class="todo">Duyệt thật 56 dòng trong <code>out/poc/contact_sheet.html</code> để có GO cho demo</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3>6 · QA tests + Report &amp; Demo</h3>
+    <div class="who">Thành viên: ________</div>
+    <p class="files"><code>tests/test_t08_deletion.py</code> · <code>tools/show_t08.py</code> · <code>reports/group_report.md</code> · <code>demo/</code></p>
+    <ul>
+      <li class="ok">13 test: thành công, legal hold, nhiều subject, untagged, idempotency, thiếu reviewer, baseline</li>
+      <li class="todo">Phân tích 2 failure mode bắt buộc: xóa nhầm exception · chỉ xóa raw mà sót bản sao/embedding</li>
+      <li class="todo">Viết <code>group_report.md</code></li>
+      <li class="todo">3–5 slide demo trong <code>demo/</code></li>
+    </ul>
+  </section>
+</div>
+
+<h2>Giao diện chung giữa các role</h2>
+<pre>load_inputs(dir)                       -&gt; (arts: dict[id -&gt; artefact], requests: list)   # Role 2
+discover_scope(subject, arts, children) -&gt; ({artefact_id: (found_via, depth)}, out_of_scope)  # Role 2
+decide_action(art, request, via, role)  -&gt; (action, reason_code)                          # Role 3
+plan_deletions(arts, requests)          -&gt; (plan DataFrame, skipped)                       # Role 3 xuất, Role 5 dùng
+out/actions.csv : request_id, artefact_id, action                                          # contract chấm điểm</pre>
+
+<h2>Mốc thời gian (240 phút)</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Phút</th><th>Role 1</th><th>Role 2</th><th>Role 3</th><th>Role 4</th><th>Role 5</th><th>Role 6</th></tr></thead>
+  <tbody>
+    <tr><td class="num">0–30</td><td>Repo, config, chốt giao diện</td><td>Đọc graph</td><td>Nháp policy</td><td>Metric contract</td><td>Thiết kế queue</td><td>Khung test</td></tr>
+    <tr><td class="num">30–50</td><td>Nối dây</td><td><code>load_inputs</code></td><td><code>decide_action</code></td><td>Baseline + metrics_baseline</td><td>—</td><td>Test baseline</td></tr>
+    <tr><td class="num">50–145</td><td><code>run</code> + <code>decide</code></td><td><code>discover_scope</code></td><td>Căn cứ pháp lý + bất biến</td><td>Self-check, CI</td><td>Review, audit, mock delete</td><td>Test case biên</td></tr>
+    <tr><td class="num">145–170</td><td>Sửa bug</td><td>Ví dụ bẫy lineage</td><td>Thử đổi thứ tự policy</td><td>metrics_poc + so sánh</td><td>Duyệt thật → GO</td><td>2 failure case</td></tr>
+    <tr><td class="num">170–180</td><td><code>make tag-demo</code></td><td colspan="4">Chuẩn bị trả lời debate</td><td>Slide</td></tr>
+    <tr><td class="num">+24h</td><td><code>make tag-final</code></td><td colspan="5">Repo tái lập được, report hoàn chỉnh, điền team_contributions.csv</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Lệnh hay dùng</h2>
+<pre>make setup            # lần đầu
+make t08              # chạy baseline + PoC, in bảng tổng kết
+make test             # pytest, phải 0 failed
+# duyệt: mở out/poc/contact_sheet.html → Export CSV → lưu thành out/poc/review_queue_reviewed.csv → make t08</pre>
+
+<footer>Tài liệu học tập, không thay tư vấn pháp lý. Dữ liệu T08 là mock graph tổng hợp, không có dữ liệu thật.</footer>
+</main>
+</body>
+</html>
