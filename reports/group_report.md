@@ -224,7 +224,7 @@ pytest -q
 
 | Học viên | Git author/email | Module / vai trò | Commit SHA / diff chứng minh | Trình bày? |
 |---|---|---|---|---|
-| Vu Duy The | 2A202604054 | Lead / Integrator + Decision owner: `configs/lab.yaml`, `src/pipeline.py` (run + decide) | `5ad14de` | ____ |
+| Vũ Duy Thế | 2A202604054 | Lead / Integrator + Decision owner: `configs/lab.yaml`, `src/pipeline.py` (run + decide) | `5ad14de` | ____ |
 | Nguyễn Văn Thọ | 2A202603299 | Data & Lineage: `src/t08_deletion.py` (load_inputs, discover_scope) | ____ | ____ |
 | Trần Đức Kỳ |2A202603277 | Policy engine: `decide_action`, `check_invariants`, `override_allowed` | ____ | ____ |
 | Nguyễn Ngọc Đồng | 2A202603291 | Baseline & Evaluation: `src/examples/t08_baseline.py`, `reports/metric_contract.md` | ____ | ____ |
@@ -235,11 +235,11 @@ pytest -q
 
 | URL | Ngày xem | 1–2 dòng ý nghĩa (không chép nguyên văn) |
 |---|---|---|
-| https://gdpr-info.eu/art-17-gdpr/ | ____ | Quyền được xóa. Khoản 3 liệt kê ngoại lệ, trong đó có nghĩa vụ pháp lý và khiếu kiện; đây là cơ sở để legal hold thắng yêu cầu xóa |
-| Luật Bảo vệ dữ liệu cá nhân 91/2025 (link: [Chinhphuvn](https://chinhphu.vn/?pageid=27160&docid=214590&classid=1&typegroupid=3)) | ____ | Quyền xóa của chủ thể dữ liệu và các trường hợp không được xóa |
-| Nghị định 356/2025 (link:[Chinhphuvn](https://vanban.chinhphu.vn/?pageid=27160&docid=216387)) | ____ | Hướng dẫn thi hành, gồm thời hạn xử lý yêu cầu (dùng cho cột `days_to_deadline`) |
-| Data Cards Playbook, Google PAIR (link: ____) | ____ | Ghi lineage/provenance cho từng artefact, là nền tảng để truy được bản dẫn xuất |
-| California DROP (link: ____) | ____ | Một yêu cầu xóa áp dụng cho mọi data broker, để so sánh với cách lan yêu cầu xóa theo lineage |
+| https://gdpr-info.eu/art-17-gdpr/ | 2026-11-14 | Quyền được xóa. Khoản 3 liệt kê ngoại lệ, trong đó có nghĩa vụ pháp lý và khiếu kiện; đây là cơ sở để legal hold thắng yêu cầu xóa |
+| Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15: [chinhphu.vn](https://chinhphu.vn/?pageid=27160&docid=214590&classid=1&typegroupid=3) · [thuvienphapluat.vn](https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Luat-Bao-ve-du-lieu-ca-nhan-2025-so-91-2025-QH15-625628.aspx) | 2026-11-14 | Luật do Quốc hội ban hành ngày 26/06/2025, hiệu lực từ 01/01/2026. Quy định quyền xóa của chủ thể dữ liệu và các trường hợp ngoại lệ, là căn cứ phía Việt Nam cho policy precedence |
+| Nghị định 356/2025/NĐ-CP: [vanban.chinhphu.vn](https://vanban.chinhphu.vn/?pageid=27160&docid=216387) · [thuvienphapluat.vn](https://thuvienphapluat.vn/van-ban/Quyen-dan-su/Nghi-dinh-356-2025-ND-CP-huong-dan-Luat-Bao-ve-du-lieu-ca-nhan-687428.aspx) | 2026-11-14 | Quy định chi tiết và biện pháp thi hành Luật 91/2025, ban hành 31/12/2025, hiệu lực 01/01/2026, thay Nghị định 13/2023. Có quy định về DPO: là người duyệt và ký quyết định trong luồng human review |
+| Data Cards Playbook, Google PAIR: https://sites.research.google/datacardsplaybook/ | 2026-11-14 | Bộ công cụ ghi tài liệu cho dataset (Ask, Inspect, Answer, Audit). Ghi rõ nguồn gốc và quá trình biến đổi dữ liệu, là nền tảng để truy lineage tới bản dẫn xuất |
+| California DROP, CPPA: https://cppa.ca.gov/data_brokers | 2026-11-14 | Nền tảng của bang California (theo Delete Act SB 362): một yêu cầu xóa gửi tới mọi data broker đã đăng ký. Để so sánh với cách nhóm lan một yêu cầu xóa qua toàn bộ lineage |
 
 ---
 
