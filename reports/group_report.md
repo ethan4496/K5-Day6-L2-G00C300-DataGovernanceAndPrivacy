@@ -224,7 +224,7 @@ pytest -q
 
 | Học viên | Git author/email | Module / vai trò | Commit SHA / diff chứng minh | Trình bày? |
 |---|---|---|---|---|
-| Vu Duy The | ____ | Lead / Integrator + Decision owner: `configs/lab.yaml`, `src/pipeline.py` (run + decide) | `5ad14de` | ____ |
+| Vu Duy The | 2A202604054 | Lead / Integrator + Decision owner: `configs/lab.yaml`, `src/pipeline.py` (run + decide) | `5ad14de` | ____ |
 | Nguyễn Văn Thọ | 2A202603299 | Data & Lineage: `src/t08_deletion.py` (load_inputs, discover_scope) | ____ | ____ |
 | Trần Đức Kỳ |2A202603277 | Policy engine: `decide_action`, `check_invariants`, `override_allowed` | ____ | ____ |
 | Nguyễn Ngọc Đồng | 2A202603291 | Baseline & Evaluation: `src/examples/t08_baseline.py`, `reports/metric_contract.md` | ____ | ____ |
