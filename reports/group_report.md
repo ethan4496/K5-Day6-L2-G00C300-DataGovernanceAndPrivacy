@@ -236,8 +236,8 @@ pytest -q
 | URL | Ngày xem | 1–2 dòng ý nghĩa (không chép nguyên văn) |
 |---|---|---|
 | https://gdpr-info.eu/art-17-gdpr/ | ____ | Quyền được xóa. Khoản 3 liệt kê ngoại lệ, trong đó có nghĩa vụ pháp lý và khiếu kiện; đây là cơ sở để legal hold thắng yêu cầu xóa |
-| Luật Bảo vệ dữ liệu cá nhân 91/2025 (link: ____) | ____ | Quyền xóa của chủ thể dữ liệu và các trường hợp không được xóa |
-| Nghị định 356/2025 (link: ____) | ____ | Hướng dẫn thi hành, gồm thời hạn xử lý yêu cầu (dùng cho cột `days_to_deadline`) |
+| Luật Bảo vệ dữ liệu cá nhân 91/2025 (link: [Chinhphuvn](https://chinhphu.vn/?pageid=27160&docid=214590&classid=1&typegroupid=3)) | ____ | Quyền xóa của chủ thể dữ liệu và các trường hợp không được xóa |
+| Nghị định 356/2025 (link:[Chinhphuvn](https://vanban.chinhphu.vn/?pageid=27160&docid=216387)) | ____ | Hướng dẫn thi hành, gồm thời hạn xử lý yêu cầu (dùng cho cột `days_to_deadline`) |
 | Data Cards Playbook, Google PAIR (link: ____) | ____ | Ghi lineage/provenance cho từng artefact, là nền tảng để truy được bản dẫn xuất |
 | California DROP (link: ____) | ____ | Một yêu cầu xóa áp dụng cho mọi data broker, để so sánh với cách lan yêu cầu xóa theo lineage |
 
